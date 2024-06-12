@@ -12,6 +12,10 @@ h1 {
     text-align: center;
     font-size: xxx-large;
 }
+h3 {
+    text-align: center;
+    font-size: x-large;
+}
 
 #breed-selection {
     margin-bottom: 20px;
