@@ -1,3 +1,5 @@
+let activeLetterButton = null;
+
 // Fetch breeds from Dog API
 fetch('https://dog.ceo/api/breeds/list/all')
     .then(response => response.json())
@@ -12,7 +14,10 @@ fetch('https://dog.ceo/api/breeds/list/all')
         alphabet.forEach(letter => {
             const letterButton = document.createElement('button');
             letterButton.textContent = letter;
-            letterButton.addEventListener('click', () => filterBreedsByLetter(letter));
+            letterButton.addEventListener('click', () => {
+                filterBreedsByLetter(letter);
+                setActiveLetterButton(letterButton);
+            });
             letterNavigation.appendChild(letterButton);
         });
 
@@ -34,6 +39,15 @@ fetch('https://dog.ceo/api/breeds/list/all')
                     breedSelection.appendChild(label);
                 }
             }
+        }
+
+        // Function to set the active letter button
+        function setActiveLetterButton(button) {
+            if (activeLetterButton) {
+                activeLetterButton.classList.remove('active-letter');
+            }
+            activeLetterButton = button;
+            activeLetterButton.classList.add('active-letter');
         }
 
         // Event listener to display images when a breed is selected
