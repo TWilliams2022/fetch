@@ -5,28 +5,38 @@ fetch('https://dog.ceo/api/breeds/list/all')
         const breedSelection = document.getElementById('breed-selection');
         const breeds = data.message;
 
-        // Create a checkbox for each breed
-        for (const breed in breeds) {
-            const checkbox = document.createElement('input');
-            checkbox.type = 'checkbox';
-            checkbox.id = breed;
-            checkbox.value = breed;
-            checkbox.classList.add('mr-2');
+        // Create an array of letters A-Z
+        const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+        const letterNavigation = document.getElementById('letter-navigation');
 
-            const label = document.createElement('label');
-            label.htmlFor = breed;
-            label.textContent = breed;
-            label.classList.add('text-lg', 'mr-4');
+        alphabet.forEach(letter => {
+            const letterButton = document.createElement('button');
+            letterButton.textContent = letter;
+            letterButton.addEventListener('click', () => filterBreedsByLetter(letter));
+            letterNavigation.appendChild(letterButton);
+        });
 
-            const wrapper = document.createElement('div');
-            wrapper.classList.add('flex', 'items-center');
-            wrapper.appendChild(checkbox);
-            wrapper.appendChild(label);
+        // Function to filter breeds by selected letter
+        function filterBreedsByLetter(letter) {
+            breedSelection.innerHTML = ''; // Clear existing breed selection
+            for (const breed in breeds) {
+                if (breed[0].toUpperCase() === letter) {
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.id = breed;
+                    checkbox.value = breed;
 
-            breedSelection.appendChild(wrapper);
+                    const label = document.createElement('label');
+                    label.htmlFor = breed;
+                    label.textContent = breed;
+
+                    breedSelection.appendChild(checkbox);
+                    breedSelection.appendChild(label);
+                }
+            }
         }
 
-        // Add event listener to display images when a breed is selected
+        // Event listener to display images when a breed is selected
         breedSelection.addEventListener('change', (event) => {
             if (event.target.checked) {
                 displayImages(event.target.value);
@@ -46,7 +56,7 @@ function displayImages(breed) {
             data.message.forEach(imageURL => {
                 const img = document.createElement('img');
                 img.src = imageURL;
-                img.classList.add('w-full', 'h-full', 'rounded-lg', 'shadow-lg');
+                img.alt = breed;
                 gallery.appendChild(img);
             });
         });
@@ -58,7 +68,7 @@ function removeImages(breed) {
     const images = gallery.getElementsByTagName('img');
 
     for (let i = images.length - 1; i >= 0; i--) {
-        if (images[i].src.includes(breed)) {
+        if (images[i].alt === breed) {
             gallery.removeChild(images[i]);
         }
     }
