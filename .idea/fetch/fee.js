@@ -1,4 +1,6 @@
 let activeLetterButton = null;
+const rainbowColors = ['#FF0000', '#FF7F00', '#FFFF00', '#00FF00', '#0000FF', '#4B0082', '#8B00FF'];
+let colorIndex = 0;
 
 // Fetch breeds from Dog API
 fetch('https://dog.ceo/api/breeds/list/all')
@@ -17,6 +19,7 @@ fetch('https://dog.ceo/api/breeds/list/all')
             letterButton.addEventListener('click', () => {
                 filterBreedsByLetter(letter);
                 setActiveLetterButton(letterButton);
+                changeButtonColor(letterButton);
             });
             letterNavigation.appendChild(letterButton);
         });
@@ -45,9 +48,21 @@ fetch('https://dog.ceo/api/breeds/list/all')
         function setActiveLetterButton(button) {
             if (activeLetterButton) {
                 activeLetterButton.classList.remove('active-letter');
+                resetButtonColor(activeLetterButton);
             }
             activeLetterButton = button;
             activeLetterButton.classList.add('active-letter');
+        }
+
+        // Function to change button color to the next color in the rainbow
+        function changeButtonColor(button) {
+            button.style.backgroundColor = rainbowColors[colorIndex];
+            colorIndex = (colorIndex + 1) % rainbowColors.length;
+        }
+
+        // Function to reset button color to original
+        function resetButtonColor(button) {
+            button.style.backgroundColor = '';
         }
 
         // Event listener to display images when a breed is selected
