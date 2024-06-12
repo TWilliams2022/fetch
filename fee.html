@@ -1,18 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>T Will's Gallery</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ty'Reik Williams</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="fee.css">
 </head>
-<body>
-    <h1>Dog Gallery</h1>
-    <div id="breed-selection">
+<body class="bg-gray-100 text-gray-900">
+<div class="container mx-auto py-8">
+    <h1 id="wiggle" class="text-4xl font-bold text-center mb-8">DOG GALLERY</h1>
+    <div id="breed-selection" class="mb-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4">
         <!-- Breed selection options will be dynamically added here -->
     </div>
-    <div id="gallery">
+    <div id="gallery" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         <!-- Dog images will be displayed here -->
     </div>
-
-    <script src="fee.js"></script>
+</div>
+<script src="fee.js"></script>
 </body>
 </html>

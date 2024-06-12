@@ -1,20 +1,13 @@
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Apple Symbols";
     margin: 0;
-    padding: 20px;
-}
-
-h1 {
-    text-align: center;
-}
-
-#breed-selection {
-    margin-bottom: 20px;
+    padding: 0;
+    background-image: url('doggie.gif');
+    background-size: cover;
+    height: 100vh;
 }
 
 #gallery img {
-    width: 200px;
-    height: 200px;
     object-fit: cover;
-    margin: 10px;
 }

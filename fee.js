@@ -1,7 +1,7 @@
 // Fetch breeds from Dog API
 fetch('https://dog.ceo/api/breeds/list/all')
-   .then(response => response.json())
-   .then(data => {
+    .then(response => response.json())
+    .then(data => {
         const breedSelection = document.getElementById('breed-selection');
         const breeds = data.message;
 
@@ -11,13 +11,19 @@ fetch('https://dog.ceo/api/breeds/list/all')
             checkbox.type = 'checkbox';
             checkbox.id = breed;
             checkbox.value = breed;
+            checkbox.classList.add('mr-2');
 
             const label = document.createElement('label');
             label.htmlFor = breed;
             label.textContent = breed;
+            label.classList.add('text-lg', 'mr-4');
 
-            breedSelection.appendChild(checkbox);
-            breedSelection.appendChild(label);
+            const wrapper = document.createElement('div');
+            wrapper.classList.add('flex', 'items-center');
+            wrapper.appendChild(checkbox);
+            wrapper.appendChild(label);
+
+            breedSelection.appendChild(wrapper);
         }
 
         // Add event listener to display images when a breed is selected
@@ -33,13 +39,14 @@ fetch('https://dog.ceo/api/breeds/list/all')
 // Function to display images of a selected breed
 function displayImages(breed) {
     fetch(`https://dog.ceo/api/breed/${breed}/images/random/5`)
-       .then(response => response.json())
-       .then(data => {
+        .then(response => response.json())
+        .then(data => {
             const gallery = document.getElementById('gallery');
 
             data.message.forEach(imageURL => {
                 const img = document.createElement('img');
                 img.src = imageURL;
+                img.classList.add('w-full', 'h-full', 'rounded-lg', 'shadow-lg');
                 gallery.appendChild(img);
             });
         });
